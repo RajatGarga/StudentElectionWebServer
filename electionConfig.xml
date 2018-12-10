@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<election>
+  <isVoting>False</isVoting>
+  <positions>
+    <pos id="1">
+      <Name>President</Name>
+      <maxWinners>1</maxWinners>
+    </pos>
+    <pos id="2">
+      <Name>VicePresident</Name>
+      <maxWinners>1</maxWinners>
+    </pos>
+    <pos id="3">
+      <Name>Senator</Name>
+      <maxWinners>2</maxWinners>
+    </pos>
+  </positions>
+  <voters>
+    <vot id="1">
+      <prefix>16ucs</prefix>
+      <sufStart>1</sufStart>
+      <sufEnd>225</sufEnd>
+    </vot>
+  </voters>
+</election>
+
