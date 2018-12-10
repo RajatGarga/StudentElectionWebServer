@@ -40,6 +40,24 @@
   	<description></description>
   	<servlet-class>services.candidateListService</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>sendVoterEmail</servlet-name>
+  	<display-name>sendVoterEmail</display-name>
+  	<description></description>
+  	<servlet-class>services.sendVoterEmail</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>VoterLogin</servlet-name>
+  	<display-name>VoterLogin</display-name>
+  	<description></description>
+  	<servlet-class>services.VoterLogin</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>Vote</servlet-name>
+  	<display-name>Vote</display-name>
+  	<description></description>
+  	<servlet-class>services.Vote</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>adminLogoutService</servlet-name>
   	<url-pattern>/adminLogout</url-pattern>
@@ -63,5 +81,17 @@
   <servlet-mapping>
   	<servlet-name>candidateListService</servlet-name>
   	<url-pattern>/candidateList</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>sendVoterEmail</servlet-name>
+  	<url-pattern>/sendVoterEmail</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>VoterLogin</servlet-name>
+  	<url-pattern>/VoterLogin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Vote</servlet-name>
+  	<url-pattern>/Vote</url-pattern>
   </servlet-mapping>
 </web-app>

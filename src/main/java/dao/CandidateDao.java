@@ -11,7 +11,7 @@ import models.Candidate;
 public class CandidateDao {
 	private static Connection conn = null;
 
-	public static void saveNomineeDetails(Candidate n1) throws SQLException {
+	public void saveCandidatesDetails(Candidate n1) throws SQLException {
 		conn = DbConnection.getConn();
 		Statement stmt = conn.createStatement();
 		String sql = "INSERT INTO NomineeDetails(first_name,family_name,email,phone_number,hostel,room_number,batch,branch,cgpa,position) VALUES('"
@@ -22,7 +22,11 @@ public class CandidateDao {
 
 	}
 
-	public ArrayList<Candidate> getAllNomineeDetails() {
+	public static ArrayList<Candidate> getApprovedCandidates() {
+
+	}
+
+	public ArrayList<Candidate> getAllCandidatesDetails() {
 		String sql = "select * from NomineeDetails";
 		ArrayList<Candidate> nominee_details = new ArrayList<Candidate>();
 		try {

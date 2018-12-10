@@ -1,5 +1,12 @@
 package models;
 
+import java.io.UnsupportedEncodingException;
+import java.security.KeyPair;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import utils.Crypto;
+
 public class Voter {
 	private String publicKey;
 	private String privateKey;
@@ -12,6 +19,32 @@ public class Voter {
 		this.privateKey = privateKey;
 		this.username = username;
 		this.pwdHash = pwdHash;
+	}
+
+	public Voter(String username, String pwd) {
+		KeyPair key = Crypto.generateKeys();
+		this.privateKey = Crypto.getPrivateKeyasString(key);
+		this.publicKey = Crypto.getPublicKeyasString(key);
+		this.username = username;
+		try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] hash = digest.digest(pwd.getBytes("UTF-8"));
+			StringBuilder string = new StringBuilder();
+			for (byte b : hash) {
+				int val = b;
+				for (int i = 0; i < 8; i++) {
+					string.append((val & 128) == 0 ? 0 : 1);
+					val <<= 1;
+				}
+			}
+			this.pwdHash = string.toString();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String getPublicKey() {

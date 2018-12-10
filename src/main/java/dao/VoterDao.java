@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import models.Voter;
 
@@ -15,5 +16,9 @@ public class VoterDao {
 	public static boolean saveVoter(Voter voter) {
 		conn = DbConnection.getConn();
 		// TODO check for duplicate using username and overwrite/create new entry
+	}
+
+	public static ArrayList<String> getAllPublicKeys() {
+
 	}
 }

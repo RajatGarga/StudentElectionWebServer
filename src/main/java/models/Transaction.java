@@ -3,14 +3,16 @@ package models;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import utils.Crypto;
+
 public class Transaction {
 	// public key of owner
-	private String owner;
+	protected String owner;
 	// public key of receiver
 	private String receiver;
 	private int coins;
 	private String id;
-	private String signature;
+	protected String signature;
 
 	public Transaction(String owner, String receiver, int coins, String id, String signature) {
 		super();
@@ -27,6 +29,20 @@ public class Transaction {
 		this.receiver = receiver;
 		this.coins = coins;
 		this.id = id;
+	}
+
+	public void sign(String key) {
+		String sign = Crypto.signMessage(this.toString(), key);
+		this.setSignature(sign);
+	}
+
+	public boolean isSignatureValid() {
+		String message = this.toString();
+		if (Crypto.verifyMessageSignature(message, this.signature, this.owner)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public String toJSON() {

@@ -3,6 +3,7 @@ package utils;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom.Document;
@@ -12,11 +13,40 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
+import models.Position;
+
 public class ElectionConfig {
 
 	public static void main(String[] args) {
 		ElectionConfig ec = new ElectionConfig();
 		ec.ReadXMLFile();
+	}
+
+	public static ArrayList<Position> getPositions() {
+		SAXBuilder builder = new SAXBuilder();
+		File xmlFile = new File("electionConfig.xml");
+
+		ArrayList<Position> positions = new ArrayList<Position>();
+
+		Document document;
+		try {
+			document = (Document) builder.build(xmlFile);
+			Element rootNode = document.getRootElement();
+
+			List posList = rootNode.getChild("positions").getChildren("pos");
+			for (int i = 0; i < posList.size(); i++) {
+				Element node = (Element) posList.get(i);
+				positions.add(
+						new Position(node.getChildText("Name"), Integer.parseInt(node.getChildText("maxWinners"))));
+			}
+		} catch (JDOMException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return positions;
 	}
 
 	public void makeFile() {

@@ -33,7 +33,7 @@ public class candidateFormHandler extends HttpServlet {
 		n1.setCgpa(request.getParameter("cgpa"));
 		n1.setPosition(request.getParameter("position"));
 		try {
-			dao.saveNomineeDetails(n1);
+			dao.saveCandidatesDetails(n1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
