@@ -47,6 +47,10 @@ public class Voter {
 		}
 	}
 
+	public Voter() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getPublicKey() {
 		return publicKey;
 	}
