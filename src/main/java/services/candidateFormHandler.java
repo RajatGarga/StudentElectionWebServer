@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CandidateDao;
 import models.Candidate;
@@ -19,13 +20,13 @@ public class candidateFormHandler extends HttpServlet {
 //	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		CandidateDao dao = new CandidateDao();
 		Candidate n1 = new Candidate();
+		CandidateDao dao = new CandidateDao();
+
 		n1.setFirstName(request.getParameter("firstName"));
 		n1.setFamilyName(request.getParameter("familyName"));
 		n1.setEmail(request.getParameter("email"));
 		n1.setPhoneNum(request.getParameter("PhoneNumber"));// long
-		n1.setDob(request.getParameter("dob"));
 		n1.setHostel(request.getParameter("hostel"));
 		n1.setRoom(request.getParameter("roomNumber"));
 		n1.setBatch(request.getParameter("batch"));
@@ -33,13 +34,16 @@ public class candidateFormHandler extends HttpServlet {
 		n1.setCgpa(request.getParameter("cgpa"));
 		n1.setPosition(request.getParameter("position"));
 		try {
-			dao.saveCandidatesDetails(n1);
+			dao.saveNomineeDetails(n1);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
+
 		}
-		System.out.println("----------------");
-		// dao.saveNomineeDetails();
-		response.sendRedirect("index.jsp");
+		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("isRegistered"));
+		session.setAttribute("candidate", n1);
+		session.setAttribute("isRegistered", true);
+		response.sendRedirect("jsp/candidateProfile.jsp");
 	}
 }

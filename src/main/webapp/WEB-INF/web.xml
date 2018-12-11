@@ -58,6 +58,42 @@
   	<description></description>
   	<servlet-class>services.Vote</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>adminProfile</servlet-name>
+  	<display-name>adminProfile</display-name>
+  	<description></description>
+  	<servlet-class>services.adminProfile</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>adminProfileSave</servlet-name>
+  	<display-name>adminProfileSave</display-name>
+  	<description></description>
+  	<servlet-class>services.adminProfileSave</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>candidateFilter</servlet-name>
+  	<display-name>candidateFilter</display-name>
+  	<description></description>
+  	<servlet-class>services.candidateFilter</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>candidateProfile</servlet-name>
+  	<display-name>candidateProfile</display-name>
+  	<description></description>
+  	<servlet-class>services.candidateProfile</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>candidateProfileSave</servlet-name>
+  	<display-name>candidateProfileSave</display-name>
+  	<description></description>
+  	<servlet-class>services.candidateProfileSave</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>candidateRequestHandler</servlet-name>
+  	<display-name>candidateRequestHandler</display-name>
+  	<description></description>
+  	<servlet-class>services.candidateRequestHandler</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>adminLogoutService</servlet-name>
   	<url-pattern>/adminLogout</url-pattern>
@@ -93,5 +129,45 @@
   <servlet-mapping>
   	<servlet-name>Vote</servlet-name>
   	<url-pattern>/Vote</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>adminProfile</servlet-name>
+  	<url-pattern>/adminProfile</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>adminProfile</servlet-name>
+  	<url-pattern>/adminProfile/edit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>adminProfileSave</servlet-name>
+  	<url-pattern>/adminProfile/Save</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>candidateFilter</servlet-name>
+  	<url-pattern>/candidateFilter</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>candidateProfile</servlet-name>
+  	<url-pattern>/candidateProfile</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>candidateProfileSave</servlet-name>
+  	<url-pattern>/candidateProfile/Save</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>candidateProfileSave</servlet-name>
+  	<url-pattern>/candidateProfile/edit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>candidateRequestHandler</servlet-name>
+  	<url-pattern>/candidateRequest</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>candidateRequestHandler</servlet-name>
+  	<url-pattern>/candidateRequest/accept</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>candidateRequestHandler</servlet-name>
+  	<url-pattern>/candidateRequest/reject</url-pattern>
   </servlet-mapping>
 </web-app>

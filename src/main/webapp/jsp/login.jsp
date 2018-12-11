@@ -35,8 +35,9 @@
 							</div>
 							<div class="group">
 								<label for="email" class="label">Email</label>
-								<input id="email" type="email" class="input" pattern=".+@lnmiit.ac.in" size="25" name="adminEmail" required>
+								<input id="email" type="email" class="input" size="25" name="adminEmail" required>
 							</div>
+							<!--  pattern=".+@lnmiit.ac.in"-->
 							<div class="group">
 								<label for="pass" class="label">Password</label>
 								<input id="pass" type="password" class="input" data-type="password" name="adminPassword">
@@ -51,7 +52,6 @@
 						</form>					
 						<div class="hr"></div>
 						<div class="foot-lnk">
-							<a href="#forgot">Forgot Password?</a>
 						</div>
 					</div>
 					<div class="sign-in-htm">

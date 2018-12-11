@@ -6,12 +6,20 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import BlockChain.BlockChain;
+import models.Block;
+import models.Candidate;
+import models.Position;
+import models.Transaction;
+import utils.General;
 
 public class VoterApp {
 	public static void main(String[] args) throws InterruptedException {
@@ -56,6 +64,28 @@ public class VoterApp {
 						System.out.println("Already Registered!");
 						return;
 					}
+					Iterator<JsonElement> it = positions.iterator();
+					Block block = new Block(General.getTimeStamp(), chain.head.hashBlock());
+					while (it.hasNext()) {
+						Position pos = Position.fromJSON(it.next().getAsString());
+						int maxPos = pos.getMaxWinners();
+						ArrayList<Candidate> can = pos.getCandidates();
+
+						for (int wow = 1; wow <= pos.getMaxWinners(); wow++) {
+							SelectVoteWindow window = new SelectVoteWindow(pos.getName(), can, wow);
+							System.out.println("Starting Waiting!" + wow);
+							WindowUtils.waitTillComplete(window.f);
+							System.out.println("Done Waiting!" + wow);
+							int n = window.returnindex;
+							Candidate cand = can.get(n);
+							Transaction tran = new Transaction(publicKey, cand.getWalletId(), maxPos--,
+									General.getTimeStamp());
+							tran.sign(privateKey);
+							block.addTransaction(tran.toJSON());
+						}
+						new ConfirmationWindow(chain, block);
+					}
+
 				}
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block

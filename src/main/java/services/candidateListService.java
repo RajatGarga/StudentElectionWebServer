@@ -19,9 +19,10 @@ public class candidateListService extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		CandidateDao dao = new CandidateDao();
-		ArrayList<Candidate> list_nominee = dao.getAllCandidatesDetails();
+		ArrayList<Candidate> list_candidate = dao.getAllCandidateDetails();
 		HttpSession session = request.getSession();
-		session.setAttribute("nominees", list_nominee);
-		response.sendRedirect("jsp/allNominee.jsp");
+		session.setAttribute("filterBtn", "all");
+		session.setAttribute("candidates", list_candidate);
+		response.sendRedirect("jsp/candidateList.jsp");
 	}
 }

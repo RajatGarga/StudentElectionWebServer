@@ -18,8 +18,13 @@ import models.Position;
 public class ElectionConfig {
 
 	public static void main(String[] args) {
-		ElectionConfig ec = new ElectionConfig();
-		ec.ReadXMLFile();
+
+		System.out.println(ElectionConfig.isRegistering());
+		System.out.println(ElectionConfig.isVoting());
+		ElectionConfig.startRegistering();
+		ElectionConfig.startVoting();
+		System.out.println(ElectionConfig.isRegistering());
+		System.out.println(ElectionConfig.isVoting());
 	}
 
 	public static ArrayList<Position> getPositions() {
@@ -47,6 +52,122 @@ public class ElectionConfig {
 			e.printStackTrace();
 		}
 		return positions;
+	}
+
+	public static boolean isRegistering() {
+		SAXBuilder builder = new SAXBuilder();
+		File xmlFile = new File("electionConfig.xml");
+		Document doc;
+		try {
+			doc = (Document) builder.build(xmlFile);
+			Element rootNode = doc.getRootElement();
+			if (rootNode.getChildText("isRegistering").matches("true")) {
+				return true;
+			}
+
+		} catch (JDOMException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static boolean startRegistering() {
+		SAXBuilder builder = new SAXBuilder();
+		File xmlFile = new File("electionConfig.xml");
+		Document doc;
+		try {
+			doc = (Document) builder.build(xmlFile);
+			Element rootNode = doc.getRootElement();
+
+			rootNode.getChild("isRegistering").setText("true");
+			XMLOutputter xmlOutput = new XMLOutputter();
+			xmlOutput.setFormat(Format.getPrettyFormat());
+			xmlOutput.output(doc, new FileWriter("electionConfig.xml"));
+			return true;
+		} catch (JDOMException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static boolean stopRegistering() {
+		SAXBuilder builder = new SAXBuilder();
+		File xmlFile = new File("electionConfig.xml");
+		Document doc;
+		try {
+			doc = (Document) builder.build(xmlFile);
+			Element rootNode = doc.getRootElement();
+
+			rootNode.getChild("isRegistering").setText("false");
+			XMLOutputter xmlOutput = new XMLOutputter();
+			xmlOutput.setFormat(Format.getPrettyFormat());
+			xmlOutput.output(doc, new FileWriter("electionConfig.xml"));
+			return true;
+		} catch (JDOMException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static boolean isVoting() {
+		SAXBuilder builder = new SAXBuilder();
+		File xmlFile = new File("electionConfig.xml");
+		Document doc;
+		try {
+			doc = (Document) builder.build(xmlFile);
+			Element rootNode = doc.getRootElement();
+			if (rootNode.getChildText("isVoting").matches("true")) {
+				return true;
+			}
+
+		} catch (JDOMException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static boolean startVoting() {
+		SAXBuilder builder = new SAXBuilder();
+		File xmlFile = new File("electionConfig.xml");
+		Document doc;
+		try {
+			doc = (Document) builder.build(xmlFile);
+			Element rootNode = doc.getRootElement();
+
+			rootNode.getChild("isVoting").setText("true");
+			XMLOutputter xmlOutput = new XMLOutputter();
+			xmlOutput.setFormat(Format.getPrettyFormat());
+			xmlOutput.output(doc, new FileWriter("electionConfig.xml"));
+			return true;
+		} catch (JDOMException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static boolean stopVoting() {
+		SAXBuilder builder = new SAXBuilder();
+		File xmlFile = new File("electionConfig.xml");
+		Document doc;
+		try {
+			doc = (Document) builder.build(xmlFile);
+			Element rootNode = doc.getRootElement();
+
+			rootNode.getChild("isVoting").setText("false");
+			XMLOutputter xmlOutput = new XMLOutputter();
+			xmlOutput.setFormat(Format.getPrettyFormat());
+			xmlOutput.output(doc, new FileWriter("electionConfig.xml"));
+			return true;
+		} catch (JDOMException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	public void makeFile() {

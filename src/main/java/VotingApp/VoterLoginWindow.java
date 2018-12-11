@@ -91,7 +91,7 @@ public class VoterLoginWindow {
 						sb.append((char) c);
 					response = sb.toString();
 				} catch (Exception e1) {
-
+					e1.printStackTrace();
 				}
 				f.dispose();
 			}

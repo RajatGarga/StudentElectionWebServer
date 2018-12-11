@@ -16,4 +16,16 @@ public class Admin extends User {
 		this.pwd = null;
 		this.userName = null;
 	}
+
+	public Admin() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
 }
