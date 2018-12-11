@@ -124,6 +124,7 @@ public class Block {
 	}
 
 	public boolean mine() {
+		// System.out.println("Mining");
 		long start = System.currentTimeMillis();
 		int hashesDone = 0;
 		while (!this.isvalid()) {
@@ -137,8 +138,10 @@ public class Block {
 			}
 		}
 		if (this.isvalid()) {
+			// System.out.println("Mine Success! :)");
 			return true;
 		} else {
+			// System.out.println("Mine Failure! :(");
 			return false;
 		}
 	}

@@ -1,6 +1,7 @@
 package services;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Random;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.VoterDao;
 import models.Voter;
 
 /**
@@ -31,14 +33,11 @@ public class sendVoterEmail extends HttpServlet {
 
 	static ArrayList<String> emails;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		emails = new ArrayList<String>();
 		emails.add("gargarajat@outlook.com");
 		emails.add("gargarajat@gmail.com");
 		emails.add("16ucs152@lnmiit.ac.in");
-		emails.add("16ucs169@lnmiit.ac.in");
-		emails.add("16ucs182@lnmiit.ac.in");
-		emails.add("16ucs075@lnmiit.ac.in");
 		Properties prop = new Properties();
 		prop.put("mail.smtp.auth", true);
 		prop.put("mail.smtp.starttls.enable", "true");
@@ -63,7 +62,7 @@ public class sendVoterEmail extends HttpServlet {
 			try {
 				sendVoterEmail.sendEmail(generatedPwd, emails.get(i), session);
 				Voter voter = new Voter(emails.get(i), generatedPwd);
-				// VoterDao.saveVoter(voter);
+				VoterDao.saveVoter(voter);
 			} catch (AddressException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

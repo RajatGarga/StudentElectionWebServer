@@ -5,6 +5,7 @@ import java.awt.event.WindowAdapter;
 import javax.swing.JFrame;
 
 public class WindowUtils {
+
 	public static void waitTillComplete(final JFrame frame) throws InterruptedException {
 		final Object lock = new Object();
 		Thread t = new Thread() {

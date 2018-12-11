@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.KeyPair;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -46,13 +47,26 @@ public class Vote extends HttpServlet {
 		keys = Crypto.generateKeys();
 		positions = ElectionConfig.getPositions();
 		ArrayList<Candidate> candidates = CandidateDao.getApprovedCandidates();
+		Iterator<Candidate> it = candidates.iterator();
+		while (it.hasNext()) {
+			Candidate can1 = it.next();
+			System.out.println(can1.toString());
+		}
 		for (int i = 0; i < candidates.size(); i++) {
 			Candidate can = candidates.get(i);
 			String regPos = can.getPosition();
 			for (int j = 0; j < positions.size(); j++) {
 				if (positions.get(j).getName().matches(regPos)) {
-					positions.get(j).addCandidate(can);
+					Position postemp = positions.get(j);
+					postemp.addCandidate(can);
+					positions.set(j, postemp);
 				}
+			}
+		}
+		int size = positions.size() - 1;
+		for (int i = size; i >= 0; i--) {
+			if (positions.get(i).getCandidates().size() == 0) {
+				positions.remove(i);
 			}
 		}
 		int max_amount = 0;
@@ -64,7 +78,7 @@ public class Vote extends HttpServlet {
 		chain = new BlockChain(null);
 		Block block = new Block(General.getTimeStamp(), chain.head.hashBlock());
 		for (int i = 0; i < voterPublicKeys.size(); i++) {
-			Transaction tran = new Transaction(voterPublicKeys.get(i), Crypto.getPrivateKeyasString(keys), max_amount,
+			Transaction tran = new Transaction(Crypto.getPublicKeyasString(keys), voterPublicKeys.get(i), 4,
 					String.valueOf(i));
 			tran.sign(Crypto.getPrivateKeyasString(keys));
 			block.addTransaction(tran.toJSON());

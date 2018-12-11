@@ -8,12 +8,12 @@ public class Position {
 	private String name;
 	private int maxWinners;
 	private ArrayList<Candidate> candidates;
-	private ArrayList<Integer> votes;
 
 	public Position(String name, int maxWinners) {
 		super();
 		this.name = name;
 		this.maxWinners = maxWinners;
+		candidates = new ArrayList<Candidate>();
 	}
 
 	public void addCandidate(Candidate can) {
@@ -51,14 +51,6 @@ public class Position {
 
 	public void setCandidates(ArrayList<Candidate> candidates) {
 		this.candidates = candidates;
-	}
-
-	public ArrayList<Integer> getVotes() {
-		return votes;
-	}
-
-	public void setVotes(ArrayList<Integer> votes) {
-		this.votes = votes;
 	}
 
 }

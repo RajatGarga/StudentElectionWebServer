@@ -44,6 +44,7 @@ public class VoterApp {
 			JsonArray positions;
 			try {
 				URL url = new URL(Constants.BASE_URL + "/Vote");
+				System.out.println("Getting chain");
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 				conn.setRequestMethod("GET");
 				int response_Code = conn.getResponseCode();
@@ -61,9 +62,11 @@ public class VoterApp {
 					BlockChain chain = BlockChain.fromJSON(voteFetchObject.get("chain").getAsString());
 					int balance = chain.getWalletAmount(publicKey);
 					if (balance <= 0) {
-						System.out.println("Already Registered!");
-						return;
+						System.out.println("Already Voted!");
+						Thread.sleep(2000);
+						System.exit(1);
 					}
+					System.out.println("Positions size : " + positions.size());
 					Iterator<JsonElement> it = positions.iterator();
 					Block block = new Block(General.getTimeStamp(), chain.head.hashBlock());
 					while (it.hasNext()) {
@@ -73,9 +76,7 @@ public class VoterApp {
 
 						for (int wow = 1; wow <= pos.getMaxWinners(); wow++) {
 							SelectVoteWindow window = new SelectVoteWindow(pos.getName(), can, wow);
-							System.out.println("Starting Waiting!" + wow);
 							WindowUtils.waitTillComplete(window.f);
-							System.out.println("Done Waiting!" + wow);
 							int n = window.returnindex;
 							Candidate cand = can.get(n);
 							Transaction tran = new Transaction(publicKey, cand.getWalletId(), maxPos--,

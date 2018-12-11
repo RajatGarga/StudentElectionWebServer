@@ -19,17 +19,12 @@ public class ElectionConfig {
 
 	public static void main(String[] args) {
 
-		System.out.println(ElectionConfig.isRegistering());
-		System.out.println(ElectionConfig.isVoting());
-		ElectionConfig.startRegistering();
-		ElectionConfig.startVoting();
-		System.out.println(ElectionConfig.isRegistering());
-		System.out.println(ElectionConfig.isVoting());
+		ElectionConfig.makeFile();
 	}
 
 	public static ArrayList<Position> getPositions() {
 		SAXBuilder builder = new SAXBuilder();
-		File xmlFile = new File("electionConfig.xml");
+		File xmlFile = new File("/home/rajat/electionConfig.xml");
 
 		ArrayList<Position> positions = new ArrayList<Position>();
 
@@ -56,7 +51,7 @@ public class ElectionConfig {
 
 	public static boolean isRegistering() {
 		SAXBuilder builder = new SAXBuilder();
-		File xmlFile = new File("electionConfig.xml");
+		File xmlFile = new File("/home/rajat/electionConfig.xml");
 		Document doc;
 		try {
 			doc = (Document) builder.build(xmlFile);
@@ -74,7 +69,7 @@ public class ElectionConfig {
 
 	public static boolean startRegistering() {
 		SAXBuilder builder = new SAXBuilder();
-		File xmlFile = new File("electionConfig.xml");
+		File xmlFile = new File("/home/rajat/electionConfig.xml");
 		Document doc;
 		try {
 			doc = (Document) builder.build(xmlFile);
@@ -94,7 +89,7 @@ public class ElectionConfig {
 
 	public static boolean stopRegistering() {
 		SAXBuilder builder = new SAXBuilder();
-		File xmlFile = new File("electionConfig.xml");
+		File xmlFile = new File("/home/rajat/electionConfig.xml");
 		Document doc;
 		try {
 			doc = (Document) builder.build(xmlFile);
@@ -114,7 +109,7 @@ public class ElectionConfig {
 
 	public static boolean isVoting() {
 		SAXBuilder builder = new SAXBuilder();
-		File xmlFile = new File("electionConfig.xml");
+		File xmlFile = new File("/home/rajat/electionConfig.xml");
 		Document doc;
 		try {
 			doc = (Document) builder.build(xmlFile);
@@ -132,7 +127,7 @@ public class ElectionConfig {
 
 	public static boolean startVoting() {
 		SAXBuilder builder = new SAXBuilder();
-		File xmlFile = new File("electionConfig.xml");
+		File xmlFile = new File("/home/rajat/electionConfig.xml");
 		Document doc;
 		try {
 			doc = (Document) builder.build(xmlFile);
@@ -141,7 +136,7 @@ public class ElectionConfig {
 			rootNode.getChild("isVoting").setText("true");
 			XMLOutputter xmlOutput = new XMLOutputter();
 			xmlOutput.setFormat(Format.getPrettyFormat());
-			xmlOutput.output(doc, new FileWriter("electionConfig.xml"));
+			xmlOutput.output(doc, new FileWriter("/home/rajat/electionConfig.xml"));
 			return true;
 		} catch (JDOMException | IOException e) {
 			// TODO Auto-generated catch block
@@ -152,7 +147,7 @@ public class ElectionConfig {
 
 	public static boolean stopVoting() {
 		SAXBuilder builder = new SAXBuilder();
-		File xmlFile = new File("electionConfig.xml");
+		File xmlFile = new File("/home/rajat/electionConfig.xml");
 		Document doc;
 		try {
 			doc = (Document) builder.build(xmlFile);
@@ -161,7 +156,7 @@ public class ElectionConfig {
 			rootNode.getChild("isVoting").setText("false");
 			XMLOutputter xmlOutput = new XMLOutputter();
 			xmlOutput.setFormat(Format.getPrettyFormat());
-			xmlOutput.output(doc, new FileWriter("electionConfig.xml"));
+			xmlOutput.output(doc, new FileWriter("/home/rajat/electionConfig.xml"));
 			return true;
 		} catch (JDOMException | IOException e) {
 			// TODO Auto-generated catch block
@@ -170,7 +165,7 @@ public class ElectionConfig {
 		return false;
 	}
 
-	public void makeFile() {
+	public static void makeFile() {
 		try {
 			Element election = new Element("election");
 			Document doc = new Document(election);
@@ -196,7 +191,7 @@ public class ElectionConfig {
 
 			XMLOutputter xmlOutput = new XMLOutputter();
 			xmlOutput.setFormat(Format.getPrettyFormat());
-			xmlOutput.output(doc, new FileWriter("electionConfig.xml"));
+			xmlOutput.output(doc, new FileWriter("/home/rajat/electionConfig.xml"));
 
 			System.out.println("BlankFile Created!");
 		} catch (IOException io) {
@@ -206,7 +201,7 @@ public class ElectionConfig {
 
 	public void ReadXMLFile() {
 		SAXBuilder builder = new SAXBuilder();
-		File xmlFile = new File("electionConfig.xml");
+		File xmlFile = new File("/home/rajat/electionConfig.xml");
 		try {
 			Document document = (Document) builder.build(xmlFile);
 			Element rootNode = document.getRootElement();

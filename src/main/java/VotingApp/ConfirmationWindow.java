@@ -40,6 +40,7 @@ public class ConfirmationWindow {
 					block.setHeight(chain.head.getHeight() + 1);
 					System.out.println("Starting to mine!");
 					if (block.mine()) {
+						System.out.println("Mined!");
 						Map<String, Object> params = new LinkedHashMap<>();
 						params.put("block", block.toJSON());
 						StringBuilder postData = new StringBuilder();
@@ -51,7 +52,7 @@ public class ConfirmationWindow {
 							postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
 						}
 						byte[] postDataBytes = postData.toString().getBytes("UTF-8");
-						URL url2 = new URL("http://localhost:8080/test");
+						URL url2 = new URL(Constants.BASE_URL + "/Vote");
 						HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
 						conn.setRequestMethod("POST");
 						conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");

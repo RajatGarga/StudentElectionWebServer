@@ -13,6 +13,7 @@ public class CandidateDao {
 	private static Connection conn = null;
 
 	public void saveNomineeDetails(Candidate n1) throws SQLException {
+		conn = DbConnection.getConn();
 		Statement stmt = conn.createStatement();
 		String sql1 = "INSERT INTO Users VALUES('" + (String) n1.getEmail() + "','" + n1.getFirstName() + "','"
 				+ n1.getFamilyName() + "');";
@@ -28,10 +29,11 @@ public class CandidateDao {
 	}
 
 	public static ArrayList<Candidate> getApprovedCandidates() {
-		return new CandidateDao().getFilteredList("approved");
+		return new CandidateDao().getFilteredList("0");
 	}
 
 	public ArrayList<Candidate> getAllCandidateDetails() {
+		conn = DbConnection.getConn();
 		String sql = "select Users.first_name,Users.family_name,Candidate.* from Users INNER JOIN Candidate ON Users.email_id = Candidate.email_id;";
 		ArrayList<Candidate> candidate_details = new ArrayList<Candidate>();
 		try {
@@ -75,6 +77,7 @@ public class CandidateDao {
 	}
 
 	public ArrayList<Candidate> getFilteredList(String requestData) {
+		conn = DbConnection.getConn();
 		String sql = "select Users.first_name,Users.family_name,Candidate.* from Users INNER JOIN Candidate ON Users.email_id = Candidate.email_id;";
 		ArrayList<Candidate> candidate_details = new ArrayList<Candidate>();
 		try {
@@ -112,6 +115,7 @@ public class CandidateDao {
 	}
 
 	public boolean isRegistered(String email_id) {
+		conn = DbConnection.getConn();
 		String sql = "select * from Candidate where email_id=?";
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -127,6 +131,7 @@ public class CandidateDao {
 	}
 
 	public Candidate getCandidateDetail(String email_id) throws SQLException {
+		conn = DbConnection.getConn();
 		String sql = "select Users.first_name,Users.family_name,Candidate.* from Users INNER JOIN Candidate ON Users.email_id = Candidate.email_id where Candidate.email_id=?;";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, email_id);
@@ -152,6 +157,7 @@ public class CandidateDao {
 	}
 
 	public void updateCandidateDetails(Candidate c1) throws SQLException {
+		conn = DbConnection.getConn();
 		String sql = "update Candidate,Users SET first_name='" + c1.getFirstName() + "',family_name='"
 				+ c1.getFamilyName() + "',cgpa='" + c1.getCgpa() + "',branch='" + c1.getBranch() + "',phone_num='"
 				+ c1.getPhoneNum() + "',room_num='" + c1.getRoom() + "',position='" + c1.getPosition() + "',batch='"

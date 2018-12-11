@@ -1,33 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <election>
-  <isVoting>true</isVoting>
-  <isRegistering>true</isRegistering>
+  <isVoting>False</isVoting>
   <positions>
     <pos id="1">
-      <Name>President</Name>
+      <Name>Name of Position</Name>
       <maxWinners>1</maxWinners>
-    </pos>
-    <pos id="2">
-      <Name>Vice-President</Name>
-      <maxWinners>1</maxWinners>
-    </pos>
-    <pos id="3">
-      <Name>GSEC-Sports</Name>
-      <maxWinners>2</maxWinners>
-    </pos>
-    <pos id="4">
-      <Name>GSEC-Science and Tech.</Name>
-      <maxWinners>2</maxWinners>
-    </pos>
-    <pos id="5">
-      <Name>GSEC-Cultural</Name>
-      <maxWinners>2</maxWinners>
     </pos>
   </positions>
   <voters>
     <vot id="1">
       <prefix>16ucs</prefix>
-      <sufStart>001</sufStart>
+      <sufStart>1</sufStart>
       <sufEnd>225</sufEnd>
     </vot>
   </voters>
